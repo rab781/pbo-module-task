@@ -1,6 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
-
 class Program
 {
     static void Main(string[] args)
@@ -95,7 +92,7 @@ class Singa : Mamalia
 
     public override string Suara()
     {
-        return ("Singa mengaum");
+        return ("Singa bersuara");
     }
 
     public string Mengaum()
@@ -110,7 +107,7 @@ class Gajah : Mamalia
 
     public override string Suara()
     {
-        return ("Gajah berteriak");
+        return ("Gajah bersuara");
     }
 }
 
@@ -120,7 +117,7 @@ class Ular : Reptil
 
     public override string Suara()
     {
-        return ("Ular mendesis");
+        return ("Ular bersuara");
     }
 
     public string Merayap()
@@ -135,7 +132,7 @@ class Buaya : Reptil
 
     public override string Suara()
     {
-        return ("Buaya menggeram");
+        return ("Buaya bersuara");
     }
 }
 

@@ -9,10 +9,10 @@ class Program
         KebunBinatang kebun = new KebunBinatang();
 
         // b. Buat beberapa objek dari berbagai jenis hewan
-        Singa singa = new Singa("Simba", 5, 4);
-        Gajah gajah = new Gajah("Dumbo", 10, 4);
-        Ular ular = new Ular("Kaa", 3, 2);
-        Buaya buaya = new Buaya("Dundee", 7, 3);
+        Singa singa = new Singa("Singa", 5, 4);
+        Gajah gajah = new Gajah("Gajah", 10, 4);
+        Ular ular = new Ular("Ular", 3, 2);
+        Buaya buaya = new Buaya("Buayaaa", 7, 3);
 
         // c. Tambahkan hewan-hewan tersebut ke kebun binatang
         kebun.TambahHewan(singa);
@@ -55,7 +55,7 @@ class Hewan
 
     public virtual string InfoHewan()
     {
-        return ($"Nama: {nama}, Umur: {umur} tahun");
+        return ($"Nama: {nama},\nUmur: {umur} tahun");
     }
 }
 

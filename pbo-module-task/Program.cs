@@ -1,188 +1,161 @@
-﻿class Program
+﻿using System;
+using System.Collections.Generic;
+
+class Program
 {
     static void Main(string[] args)
     {
-        kebunBinatang kebun = new kebunBinatang();
+        // a. Buat objek kebun binatang
+        KebunBinatang kebun = new KebunBinatang();
 
-        // Membuat beberapa objek hewan menggunakan constructor
-        singa singa = new singa("Singa", 7, 4);
-        Gajah gajah = new Gajah("Gajah", 10, 4);
-        ular ular = new ular("Ular Python", 3, 5);
+        // b. Buat beberapa objek dari berbagai jenis hewan
+        Singa singa = new Singa("Simba", 5, 4);
+        Gajah gajah = new Gajah("Dumbo", 10, 4);
+        Ular ular = new Ular("Kaa", 3, 2);
+        Buaya buaya = new Buaya("Dundee", 7, 3);
 
-        // Menambahkan hewan ke dalam kebun binatang
-        kebun.tambahHewan(singa);
-        kebun.tambahHewan(ular);
-        kebun.tambahHewan(gajah);
+        // c. Tambahkan hewan-hewan tersebut ke kebun binatang
+        kebun.TambahHewan(singa);
+        kebun.TambahHewan(gajah);
+        kebun.TambahHewan(ular);
+        kebun.TambahHewan(buaya);
 
-        // Menampilkan daftar hewan di kebun binatang
+        // d. Panggil method DaftarHewan() untuk menampilkan semua hewan
         kebun.DaftarHewan();
 
-        // Untuk menampilkan suara singa
-        singa.Suara();
-        Console.WriteLine();
+        Console.WriteLine("\nDemonstrasi polymorphism:");
+        // e. Demonstrasi penggunaan polymorphism
+        Console.WriteLine(singa.Suara());
+        Console.WriteLine(gajah.Suara());
+        Console.WriteLine(ular.Suara());
+        Console.WriteLine(buaya.Suara());
 
-        // Untuk menampilkan suara gajah
-        gajah.Suara();
-        Console.WriteLine();
-
-        // Untuk menampilkan suara ular
-        ular.Suara();
-        Console.WriteLine();
-
-        // Memanggil method mengaum dari objek singa
-        singa.mengaum();
-        ular.merayap();
+        // f. Panggil method khusus
+        Console.WriteLine("\nMethod khusus:");
+        Console.WriteLine(singa.Mengaum());
+        Console.WriteLine(ular.Merayap());
     }
 }
 
-class hewan
+class Hewan
 {
     public string nama;
     public int umur;
 
-    // Constructor untuk inisialisasi nama dan umur langsung
-    public hewan(string nama, int umur)
+    public Hewan(string nama, int umur)
     {
         this.nama = nama;
         this.umur = umur;
     }
 
-    public virtual void Suara()
+    public virtual string Suara()
     {
-        Console.WriteLine("Hewan ini bersuara");
+        return ("Hewan ini bersuara");
     }
 
-    public virtual void Infohewan()
+    public virtual string InfoHewan()
     {
-        Console.WriteLine("Nama Hewan: " + nama);
-        Console.WriteLine("Umur Hewan: " + umur);
+        return ($"Nama: {nama}, Umur: {umur} tahun");
     }
 }
 
-class Mamalia : hewan
+class Mamalia : Hewan
 {
     public int jumlahKaki;
 
-    // Constructor untuk inisialisasi nama, umur, dan jumlahKaki
-    public Mamalia(string nama, int umur, int jumlahKaki)
-        : base(nama, umur) // Memanggil constructor dari kelas hewan
+    public Mamalia(string nama, int umur, int jumlahKaki) : base(nama, umur)
     {
         this.jumlahKaki = jumlahKaki;
     }
 
-    public override void Infohewan()
+    public override string InfoHewan()
     {
-        base.Infohewan();
-        Console.WriteLine("Jumlah Kaki: " + jumlahKaki);
-    }
-
-    public override void Suara()
-    {
-        Console.WriteLine("Mamalia ini bersuara");
+        return base.InfoHewan() + ($"\nJumlah Kaki: {jumlahKaki}");
     }
 }
 
-class Reptil : hewan
+class Reptil : Hewan
 {
-    public int panjangTubuh;
+    public double panjangTubuh;
 
-    // Constructor untuk inisialisasi nama, umur, dan panjangTubuh
-    public Reptil(string nama, int umur, int panjangTubuh)
-        : base(nama, umur) // Memanggil constructor dari kelas hewan
+    public Reptil(string nama, int umur, double panjangTubuh) : base(nama, umur)
     {
         this.panjangTubuh = panjangTubuh;
     }
 
-    public override void Suara()
+    public override string InfoHewan()
     {
-        Console.WriteLine("Reptil ini bersuara");
+        return base.InfoHewan() + ($"\nPanjang Tubuh: {panjangTubuh} meter");
     }
 }
 
-class singa : Mamalia
+class Singa : Mamalia
 {
-    // Constructor untuk inisialisasi nama, umur, dan jumlahKaki
-    public singa(string nama, int umur, int jumlahKaki)
-        : base(nama, umur, jumlahKaki)
+    public Singa(string nama, int umur, int jumlahKaki) : base(nama, umur, jumlahKaki) { }
+
+    public override string Suara()
     {
+        return ("Singa mengaum");
     }
 
-    public override void Suara()
+    public string Mengaum()
     {
-        Console.WriteLine("Singa mengaum");
-    }
-
-    public void mengaum()
-    {
-        Console.WriteLine("Singa sedang mengaum");
+        return ("Singa sedang mengaum dengan keras");
     }
 }
 
 class Gajah : Mamalia
 {
-    // Constructor untuk inisialisasi nama, umur, dan panjangTubuh
-    public Gajah(string nama, int umur, int jumlahKaki)
-        : base(nama, umur, jumlahKaki)
+    public Gajah(string nama, int umur, int jumlahKaki) : base(nama, umur, jumlahKaki) { }
+
+    public override string Suara()
     {
+        return ("Gajah berteriak");
+    }
+}
+
+class Ular : Reptil
+{
+    public Ular(string nama, int umur, double panjangTubuh) : base(nama, umur, panjangTubuh) { }
+
+    public override string Suara()
+    {
+        return ("Ular mendesis");
     }
 
-    public override void Suara()
+    public string Merayap()
     {
-        Console.WriteLine("Gajah berbunyi");
+        return ("Ular sedang merayap");
     }
 }
 
 class Buaya : Reptil
 {
-    // Constructor untuk inisialisasi nama, umur, dan panjangTubuh
-    public Buaya(string nama, int umur, int panjangTubuh)
-        : base(nama, umur, panjangTubuh)
-    {
-    }
+    public Buaya(string nama, int umur, double panjangTubuh) : base(nama, umur, panjangTubuh) { }
 
-    public override void Suara()
+    public override string Suara()
     {
-        Console.WriteLine("Buaya menggeram");
+        return ("Buaya menggeram");
     }
 }
 
-class ular : Reptil
+class KebunBinatang
 {
-    // Constructor untuk inisialisasi nama, umur, dan panjangTubuh
-    public ular(string nama, int umur, int panjangTubuh)
-        : base(nama, umur, panjangTubuh)
-    {
-    }
+    private List<Hewan> daftarHewan = new List<Hewan>();
 
-    public override void Suara()
-    {
-        Console.WriteLine("Ular mendesis");
-    }
-
-    public void merayap()
-    {
-        Console.WriteLine("Ular Merayap");
-    }
-}
-class kebunBinatang
-{
-    // List untuk menyimpan koleksi hewan
-    private List<hewan> daftarHewan = new List<hewan>();
-
-    // Method untuk menambahkan hewan ke daftar
-    public void tambahHewan(hewan hewan)
+    public void TambahHewan(Hewan hewan)
     {
         daftarHewan.Add(hewan);
         Console.WriteLine($"{hewan.nama} berhasil ditambahkan ke kebun binatang.");
     }
 
-    // Method untuk menampilkan semua hewan di kebun binatang
     public void DaftarHewan()
     {
         Console.WriteLine("Daftar hewan di kebun binatang:");
         foreach (var hewan in daftarHewan)
         {
-            hewan.Infohewan();
+            Console.WriteLine(hewan.InfoHewan());
+            Console.WriteLine();
         }
     }
 }
